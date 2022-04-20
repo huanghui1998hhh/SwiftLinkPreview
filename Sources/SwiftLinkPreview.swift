@@ -398,10 +398,8 @@ extension SwiftLinkPreview {
             } else {
                 do {
                     let data = try Data(contentsOf: sourceUrl)
-                    var source: NSString? = nil
-                    NSString.stringEncoding(for: data, encodingOptions: nil, convertedString: &source, usedLossyConversion: nil)
 
-                    if let source = source {
+                    if let source = String(data: data, encoding: .utf8) {
                         if !cancellable.isCancelled {
                             self.parseHtmlString(source as String, response: response, completion: completion)
                         }
